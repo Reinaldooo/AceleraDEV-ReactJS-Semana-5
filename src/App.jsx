@@ -5,30 +5,43 @@ import Contacts from "./components/Contacts";
 import TopBar from "./components/TopBar";
 import Filters from "./components/Filters";
 import { apiUrl } from "./services/api"
+import { searchFilter } from "./services/utils"
 
 class App extends React.Component {
   state = {
-    peopleApi: [],
-    people: []
+    people: [],
+    peopleToShow: []
   };
+  //
   componentDidMount() {
     fetch(apiUrl).then(
       async (result) => {
         const resultJSON = await result.json();
         this.setState({
           peopleApi: resultJSON,
-          people: resultJSON
+          peopleToShow: resultJSON
         });
       }
     );
   }
+  //
+  handleSearch = (e) => {
+    e.preventDefault()
+    let value = e.target.value
+    this.setState(oldState => ({
+      peopleToShow: searchFilter(oldState.peopleApi, value)
+    }))
+  }
   render() {
-    const { people } = this.state;
+    const { peopleToShow } = this.state;
     return (
       <>
         <TopBar />
-        <Filters />        
-        <Contacts people={people} />
+        <Filters 
+          handleSearch={this.handleSearch}
+          handleFilter={this.handleFilter}
+        />       
+        <Contacts people={peopleToShow} />
       </>
     );
   }
