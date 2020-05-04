@@ -1,8 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import { DebounceInput } from "react-debounce-input";
-
-class Filters extends React.Component {
+//
+import { buttonsHelper } from "../services/utils";
+import FilterButton from "./FilterButton";
+class Filters extends Component {
+  state = {
+    selected: "",
+  };
+  //
+  handleSelect = (title, filter, desc) => {
+    this.setState(
+      {
+        selected: title,
+      },
+      this.props.handleFilter(filter, desc)
+    );
+  };
+  //
   render() {
+    const { selected } = this.state;
     return (
       <div className="container" data-testid="filters">
         <section className="filters">
@@ -18,26 +34,15 @@ class Filters extends React.Component {
               <i className="fa fa-search" />
             </button>
           </div>
-
-          <button className="filters__item is-selected">
-            Nome <i className="fas fa-sort-down" />
-          </button>
-
-          <button className="filters__item">
-            País <i className="fas fa-sort-down" />
-          </button>
-
-          <button className="filters__item">
-            Empresa <i className="fas fa-sort-down" />
-          </button>
-
-          <button className="filters__item">
-            Departamento <i className="fas fa-sort-down" />
-          </button>
-
-          <button className="filters__item">
-            Data de admissão <i className="fas fa-sort-down" />
-          </button>
+          {buttonsHelper.map(({ title, filter }) => (
+            <FilterButton
+              key={title}
+              title={title}
+              filter={filter}
+              handleSelect={this.handleSelect}
+              selected={title === selected}
+            />
+          ))}
         </section>
       </div>
     );

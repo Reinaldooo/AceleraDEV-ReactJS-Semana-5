@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { ReactComponent as LogoSvg } from "../assets/img/logo.svg";
 
-class TopBar extends React.Component {
+class TopBar extends Component {
   render() {
     return (
       <header data-testid="topbar" className="topbar">

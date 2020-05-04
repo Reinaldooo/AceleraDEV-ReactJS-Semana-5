@@ -4,13 +4,13 @@ import "./App.scss";
 import Contacts from "./components/Contacts";
 import TopBar from "./components/TopBar";
 import Filters from "./components/Filters";
-import { fakeApi } from "./services/api"
-import { searchFilter } from "./services/utils"
+import { fakeApi } from "./services/api";
+import { searchFilter, sortBy } from "./services/utils";
 
 class App extends React.Component {
   state = {
     people: [],
-    peopleToShow: []
+    peopleToShow: [],
   };
   //
   componentDidMount() {
@@ -24,27 +24,34 @@ class App extends React.Component {
     //   }
     // );
     this.setState({
-      people: fakeApi,
-      peopleToShow: fakeApi
-    })
+      peopleApi: fakeApi,
+      peopleToShow: fakeApi,
+    });
   }
   //
   handleSearch = (e) => {
-    e.preventDefault()
-    let value = e.target.value.trim()
-    this.setState(oldState => ({
-      peopleToShow: searchFilter(oldState.peopleApi, value)
-    }))
-  }
+    e.preventDefault();
+    let value = e.target.value.trim();
+    this.setState((oldState) => ({
+      peopleToShow: searchFilter(oldState.peopleApi, value),
+    }));
+  };
+  //
+  handleFilter = (filter, desc) => {
+    this.setState((oldState) => ({
+      peopleToShow: sortBy(oldState.peopleToShow, filter, desc),
+    }));
+  };
+  //
   render() {
     const { peopleToShow } = this.state;
     return (
       <>
         <TopBar />
-        <Filters 
+        <Filters
           handleSearch={this.handleSearch}
           handleFilter={this.handleFilter}
-        />       
+        />
         <Contacts people={peopleToShow} />
       </>
     );
