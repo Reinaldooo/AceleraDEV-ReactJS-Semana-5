@@ -20,7 +20,7 @@ class Filters extends React.Component {
           </div>
 
           <button className="filters__item is-selected">
-            Nome <i className="fas fa-sort-up" />
+            Nome <i className="fas fa-sort-down" />
           </button>
 
           <button className="filters__item">

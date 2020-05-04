@@ -4,7 +4,7 @@ import "./App.scss";
 import Contacts from "./components/Contacts";
 import TopBar from "./components/TopBar";
 import Filters from "./components/Filters";
-import { apiUrl } from "./services/api"
+import { fakeApi } from "./services/api"
 import { searchFilter } from "./services/utils"
 
 class App extends React.Component {
@@ -14,20 +14,24 @@ class App extends React.Component {
   };
   //
   componentDidMount() {
-    fetch(apiUrl).then(
-      async (result) => {
-        const resultJSON = await result.json();
-        this.setState({
-          peopleApi: resultJSON,
-          peopleToShow: resultJSON
-        });
-      }
-    );
+    // fetch(apiUrl).then(
+    //   async (result) => {
+    //     const resultJSON = await result.json();
+    //     this.setState({
+    //       peopleApi: resultJSON,
+    //       peopleToShow: resultJSON
+    //     });
+    //   }
+    // );
+    this.setState({
+      people: fakeApi,
+      peopleToShow: fakeApi
+    })
   }
   //
   handleSearch = (e) => {
     e.preventDefault()
-    let value = e.target.value
+    let value = e.target.value.trim()
     this.setState(oldState => ({
       peopleToShow: searchFilter(oldState.peopleApi, value)
     }))
