@@ -10,7 +10,7 @@ export const buttonsHelper = [
   { title: "Departamento", filter: "department" },
 ];
 
-export const sortBy = (arr, filter = "name", desc = true) => {
+export const sortBy = (arr, filter = "id", desc = true) => {
   const tmp = [...arr];
   const greater = desc ? 1 : -1;
   const lower = greater * -1;
@@ -21,7 +21,9 @@ export const sortBy = (arr, filter = "name", desc = true) => {
   return tmp;
 };
 
-export const searchFilter = (arr, value) => {
-  if (!value) return arr;
-  return sortBy(arr.filter(({ name }) => name.toLowerCase().includes(value)));
+export const searchFilter = (arr, query, filter) => {
+  if (!query) return arr;
+  // Search list by name
+  const tmp = [...arr].filter(({ name }) => name.toLowerCase().includes(query))
+  return sortBy(tmp, filter);
 };
