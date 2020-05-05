@@ -1,4 +1,4 @@
-# SPA: Contacts App
+# SPA: Contacts App using Javascript and ReactJS
 
 This app purpose is to fetch an external API and show a list of contacts, allowing search by name and filtering by categories.
 
