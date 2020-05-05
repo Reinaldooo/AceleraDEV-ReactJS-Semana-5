@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { DebounceInput } from "react-debounce-input";
 //
 import { buttonsHelper } from "../services/utils";
-import FilterButton from "./FilterButton.jsx";
+import FilterButton from "./FilterButton";
 class Filters extends Component {
   state = {
     selected: "",

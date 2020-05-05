@@ -1,9 +1,9 @@
 import React from "react";
 //
 import "./App.scss";
-import Contacts from "./components/Contacts.jsx";
-import TopBar from "./components/TopBar.jsx";
-import Filters from "./components/Filters.jsx";
+import Contacts from "./components/Contacts";
+import TopBar from "./components/TopBar";
+import Filters from "./components/Filters";
 import { searchFilter, sortBy } from "./services/utils";
 import { apiUrl } from "./services/api";
 
